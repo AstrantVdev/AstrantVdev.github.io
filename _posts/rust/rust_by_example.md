@@ -46,7 +46,7 @@ Vous trouverez ici mon "résumé", ou plutôt la liste des différntes notions �
 - used to return multiple values in fn
 - signature: `(T1, T2, ...)`
 ```rust
-//parsing a tuple inside vars
+// Destructure a tuple
 let (int_param, bool_param) = pair;
 
 // To create one element tuples, comma or it's just an integer
@@ -71,3 +71,69 @@ let snd = pair.1;
 **Slices***
 - signature: `&[T]` and ahs a pointer and a length
 - to borrow a section of an array
+
+# Custom Types
+
+- struct
+- enum
+- const/static
+
+## Structures
+
+- Tuple structs, which are, basically, named tuples, for generics
+- The classic C structs
+- Unit structs, which are field-less, are useful for generics
+
+```rust
+let point: Point = Point { x: 10.3, y: 0.4 };
+
+let bottom_right = Point { x: 5.2, ..point }; //auto-fill
+
+// Destructure the point using a `let` binding
+let Point { x: left_edge, y: top_edge } = point;
+```
+
+## enums
+
+***enum***
+```rust
+enum WebEvent {
+    PageLoad,
+    Paste(String),
+    Click { x: i64, y: i64 },
+}
+```
+
+***casting***
+```rust
+enum Color {
+    Red = 0xff0000,
+    Green = 0x00ff00,
+    Blue = 0x0000ff,
+}
+
+println!("roses are #{:06x}", Color::Red as i32); //casting
+```
+
+***use***
+```rust
+enum Status {
+    Rich,
+    Poor,
+}
+
+fn main() {
+
+    match status {
+        // Note the lack of scoping because of the explicit `use` above.
+        Rich => println!("The rich have lots of money!"),
+        Poor => println!("The poor have no money..."),
+    }
+}
+```
+
+## Constants
+
+- const: An unchangeable value (the common case).
+- static: A possibly mutable variable with 'static lifetime. The static lifetime is inferred and does not have to be specified. Accessing or modifying a mutable static variable is unsafe
+
