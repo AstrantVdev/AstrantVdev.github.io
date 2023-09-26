@@ -72,13 +72,13 @@ let snd = pair.1;
 - signature: `&[T]` and ahs a pointer and a length
 - to borrow a section of an array
 
-# Custom Types
+# 3. Custom Types
 
 - struct
 - enum
 - const/static
 
-## Structures
+## 3.1 Structures
 
 - Tuple structs, which are, basically, named tuples, for generics
 - The classic C structs
@@ -93,7 +93,7 @@ let bottom_right = Point { x: 5.2, ..point }; //auto-fill
 let Point { x: left_edge, y: top_edge } = point;
 ```
 
-## enums
+## 3.2 Enums
 
 ***enum***
 ```rust
@@ -132,10 +132,61 @@ fn main() {
 }
 ```
 
-## Constants
+## 3.3 Constants
 
 - const: An unchangeable value (the common case).
 - static: A possibly mutable variable with 'static lifetime. The static lifetime is inferred and does not have to be specified. Accessing or modifying a mutable static variable is unsafe
+
+# 4. Variable Bindings
+
+***Variable Bindings***
+- bind a value to a variable
+
+***Type inference***
+- compiler guess type of a value, no need to annotate/cast 
+
+***_variable***
+- no unutilized warning for variable begining by *_*
+
+## 4.1 Mutability
+
+***Mutable***
+- all variable are immutable by default with *let binding*, *let mut* is needed to make it mutable
+
+## 4.2 Scope and Shadowing
+
+***shadowing***
+- immutable variables can be shadowed and attributes another value
+```rust
+let value = 0;
+let value = "uwu"
+```
+
+***scope***
+- block of code containing some variables and code
+- inner variables of a scope have a lifetime equal to their scope ending by default
+
+## 4.3 Declare first
+
+***declaration***
+- name a variable
+- can be done without *initialisation*, but compil error if never initialized
+- *declaration first* is seldom because risky
+
+***initialization***
+- set value/type of a declared variable
+
+## 4.4 Freezing
+
+***freezing***
+- cancel mutability of a variable by using :
+```rust
+let mut _mutable_integer = 7i32;
+{
+    let _mutable_integer = _mutable_integer;
+}
+```
+
 
 
 
