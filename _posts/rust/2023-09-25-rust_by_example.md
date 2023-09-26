@@ -137,3 +137,5 @@ fn main() {
 - const: An unchangeable value (the common case).
 - static: A possibly mutable variable with 'static lifetime. The static lifetime is inferred and does not have to be specified. Accessing or modifying a mutable static variable is unsafe
 
+
+
