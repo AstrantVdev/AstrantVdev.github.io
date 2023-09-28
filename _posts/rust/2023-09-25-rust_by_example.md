@@ -187,6 +187,18 @@ let mut _mutable_integer = 7i32;
 }
 ```
 
+# 5. Types
+
+## 5.1 Casting
+
+***coercion***
+- unexplicit type conversion, opposit to casting
+
+***casting***
+-
+
+
+
 
 
 
