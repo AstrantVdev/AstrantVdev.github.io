@@ -1,3 +1,9 @@
+---
+layout: post
+title: Apprendre rust par l'exemple
+tags: dev rust
+---
+
 # Intro
  
 Vous trouverez ici mon "résumé", ou plutôt la liste des différntes notions à retenir dans chaque chapitre du [rust by example](https://doc.rust-lang.org/stable/rust-by-example/). Chaque élément en italique et gras est une de ces notions.

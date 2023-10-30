@@ -1,3 +1,9 @@
+---
+layout: post
+title: C'est quoi l'informatique ?
+tags: dev def
+---
+
 # C'est quoi l'informatique ?
 
 J'ai de maigre connaissance en la matière alors même que j'en suis le premier utilisateur. Néanmoins je me tente à l'exercice afin de voir évoluer ma conception de ma discipline au fil des années. **Vous pourriez vous aussi écrire sur votre discipline, ce serait amusant.** 
