@@ -195,10 +195,308 @@ let mut _mutable_integer = 7i32;
 - unexplicit type conversion, opposit to casting
 
 ***casting***
--
+- for primitive types and cost free : `borrowed -> borrowed`
+```rust
+let owo = 1;
+let uwu = owo as f64;
+```
 
 ## 5.2 Litterals
 
+***type annotated*** if not, type depend context
+```rust
+let x = 1u8;
+let y = 2u32;
+let z = 3f32;
+```
+
+## 5.3 Inference
+***inference engine***
+```rust
+let elem = 5u8;
+let mut vec = Vec::new();
+
+//OMG ! u8 vec !
+vec.push(elem);
+```
+
+## 5.4 Aliasing
+
+***aliasing***
+```rust
+type NanoSecond = u64;
+type Inch = u64;
+type U64 = u64;
+// Inch, NanoSecond, U64, u64 are SAME types
+```
+
+# 6. Conversion
+
+Conversion for custom types use ***From*** and ***Into*** ***traits*** in general, but there are others.
+
+## 6.1 From and Into
+
+***From***
+```rust
+let my_str = "hello";
+let my_string = String::from(my_str);
+
+struct Number {
+    val: i32;
+}
+
+impl From<i32> for Number { //why From<i32> for ? Cause necessary to use Into
+    fn from(num: i32) -> Self {
+        Number { val: num }
+    }
+}
+```
+
+***Into***
+```rust
+let num: Number = int.into(); //into always implemented when from is
+
+//impl into from foreign types (not your crate's types), here imagine Number is not created by u
+impl Into<Number> for i32 {
+    fn into(self) -> Number {
+        Number { value: self }
+    }
+}
+```
+
+## 6.2 TryFrom and TryInto
+
+- like ***into*** and ***from***
+- return ***Result***
+
+```rust
+struct EvenNumber(i32);
+
+impl TryFrom<i32> for EvenNumber {
+    type Error = ();
+
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        if value % 2 == 0 {
+            Ok(EvenNumber(value))
+        } else {
+            Err(())
+        }
+    }
+}
+```
+
+## 6.3 To and Strings
+
+```rust
+struct Circle {
+    radius: i32
+}
+
+impl fmt::Display for Circle {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Circle of radius {}", self.radius)
+    }
+}
+
+fn main() {
+    let circle = Circle { radius: 6 };
+    println!("{}", circle.to_string());
+}
+```
+
+***parsing*** string into another type
+- ***FromStr*** implemented on this type
+- idiomatic  : parse
+- arrange type : turbofish synthax
+```rust
+let parsed: i32 = "5".parse().unwrap();
+let turbo_parsed = "10".parse::<i32>().unwrap();
+```
+
+# 7. Expresssions
+
+Rust program = (mostly) series of statments :
+```rust
+fn main() {
+    // statement
+    // statement
+    // statement
+}
+
+fn main() {
+    // variable binding
+    let x = 5;
+
+    // expression;
+    x;
+    x + 1;
+    15;
+}
+```
+
+function are also statement
+```rust
+// assign x to 2
+let x = {
+    1 + 1
+}
+
+// assign x to ()
+let x = {
+    1 + 1;
+}
+```
+
+# 8. Flow of Control
+
+Lets modify control flow !
+
+## 8.1 if/else
+
+```rust
+if n < 0 {
+    print!("{} is negative", n);
+} else if n > 0 {
+    print!("{} is positive", n);
+} else {
+    print!("{} is zero", n);
+}
+
+let big_n =
+    if n < 10 && n > -10 {
+        println!(", and is a small number, increase ten-fold");
+        10 * n
+    };
+```
+
+## 8.2 loop
+- ***break;*** to exit loop
+- ***continue;*** skip ***iteration*** and start new one
+
+### 8.2.1 Nesting and Labels
+```rust
+'outer loop {
+    println!("first");
+
+    'inner loop {
+        println!("second");
+        break 'outer;
+        continue 'outer; // skiped by previouss break
+    }
+
+    println!("never");
+}
+```
+
+### 8.2.2 returning from loops
+
+- loop can be used to retry an expression until it succeed and returns a value
+```rust
+let mut counter = 0;
+let i = loop {
+    counter += 1;
+
+    if(counter == 10) {
+        break 4;
+    }
+
+} // i = 4 !!
+```
+
+# 8.3 while 
+
+```rust
+let mut counter = 0;
+
+while counter < 10 {
+    counter += 1;
+    println!("{}", counter);
+}
+```
+
+# 8.4 for and range
+
+- ***for in*** iterates through a ***iterator***
+- a..b (range notation) create an iterator, b excluded
+- a..=b b included
+
+```rust
+for i in 1..5 {
+    println!("{}", i);
+}
+```
+
+- convert some collections to iterators with ***.into_iter()*** by default uwu
+
+***.iter()*** borrow each element of iterator
+***.into_iter()*** consumes collection
+***.iter_mut()*** borrow mut each element of collection to allow modif
+```rust
+let names = vec!["Bob", "Frank", "Ferris"];
+
+for name in names.iter() {
+    match name {
+        &"Ferris" => println!("There is a rustacean among us!"),
+        _ => println!("Hello {}", name),
+    }
+}
+
+for name in names.into_iter() {
+    match name {
+        "Ferris" => println!("There is a rustacean among us!"),
+        _ => println!("Hello {}", name),
+    }
+}
+
+for name in names.iter_mut() {
+    *name = match {
+        &mut "Ferris" => println!("There is a rustacean among us!"),
+        _ => println!("Hello {}", name),
+    }
+}
+```
+
+## 8.5 match
+
+patern matching with ***match** keyword (switch in c)
+```rust
+let number = 13;
+match number {
+    1 => println!("One!"),
+    2 | 3 | 5 | 7 | 11 => println!("This is a prime"),
+    13..=19 => println!("A teen"),
+    _ => println!("Ain't special"),
+}
+```
+
+### 8.5.1 Descructing
+
+***match*** can ***deconstruct*** items in a variety of ways
+
+#### 8.5.1.1 Tuples
 
 
 
+### 8.5.2 Guards
+
+***match guard*** allow condition inside match
+```rust
+#[allow(dead_code)]
+enum Temperature {
+    Celsius(i32),
+    Fahrenheit(i32),
+}
+
+fn main() {
+    let temperature = Temperature::Celsius(35);
+
+    match temperature {
+        Temperature::Celsius(t) if t > 30 => println!("{}C is above 30 Celsius", t),
+        // The `if condition` part ^ is a guard
+        Temperature::Celsius(t) => println!("{}C is below 30 Celsius", t),
+
+        Temperature::Fahrenheit(t) if t > 86 => println!("{}F is above 86 Fahrenheit", t),
+        Temperature::Fahrenheit(t) => println!("{}F is below 86 Fahrenheit", t),
+    }
+}
+```
