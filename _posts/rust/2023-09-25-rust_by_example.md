@@ -780,6 +780,9 @@ pretty();
 # 9.2.3
 
 Using closures as fn parameter requiring generics (traits: `Fn`, `FnMut`, or `FnOnce`) which dictate how a closure captures variables from the enclosing scope.
+- `Fn` for closures that capture immutable variables
+- `FnMut` atmost for closures that capture mutable variables
+- `FnOnce` atmost for closures that consumme variables
 
 ```rust
 // `F` must implement `Fn` for a closure which takes no
@@ -817,6 +820,12 @@ fn create_fn () -> impl Fn {
 
 # 9.2.6.1 Iterator::any
 
+# 9.2.6.2 Searching through iterators
+
+```rust
+fn find<P>(&mut self, predicator: P) -> Option<Self::Item> where
+P: FnMut(&Self::Item) -> bool;
+```
 
 # 9.2.6.2 Searching through iterators
 
