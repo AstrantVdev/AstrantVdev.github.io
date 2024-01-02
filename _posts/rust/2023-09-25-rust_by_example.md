@@ -1,8 +1,12 @@
 # Intro
  
-Vous trouverez ici mon "résumé", ou plutôt la liste des différntes notions à retenir dans chaque chapitre du [rust by example](https://doc.rust-lang.org/stable/rust-by-example/). Chaque élément en italique et gras est une de ces notions.
+Vous trouverez ici mon "résumé", ou plutôt la liste des différentes notions à retenir chapitre par chapitre du [rust by example](https://doc.rust-lang.org/stable/rust-by-example/). Chaque élément en italique et gras est une de ces notions.
 
 # Sommaire
+
+# 1.
+
+porco rosso, je pleure, *bang bang*
 
 # 2. Primitives
 
@@ -14,20 +18,32 @@ Vous trouverez ici mon "résumé", ou plutôt la liste des différntes notions �
 - bool either true or false
 - The unit type (), whose only possible value is an empty tuple: ()
 
+---
+
 ***Compound Types***
 - Arrays like [1, 2, 3]
 - Tuples like (1, true)
 
+---
+
 ***Inferrence***
+
+---
 
 ***Shadowing***
 
+---
+
 ***Mutable***
+
+---
 
 ***Byte*** 
 - est la plus petite unité de donnée allouable par un ordinateur
 - pas un ***Bit !***
-- constitué d'un certains nombre de bits (très couramment 8, soir un octet)
+- constitué d'un certains nombre de bits (très couramment 8, soit un octet)
+
+---
 
 ***64 bits processor*** 
 - un processeur qui peut créer 2e64 bytes(souvent octet) adresses mémoires
@@ -53,6 +69,8 @@ let (int_param, bool_param) = pair;
 println!("One element tuple: {:?}", (5u32,));
 ```
 
+---
+
 ***indexing***
 ```rust
 let pair = (1, 2);
@@ -68,8 +86,10 @@ let snd = pair.1;
 - stored in contigues memory in stack
 - signature : `[T; length]`
 
-**Slices***
-- signature: `&[T]` and ahs a pointer and a length
+---
+
+***Slices***
+- signature: `&[T]` and has a pointer and a length
 - to borrow a section of an array
 
 # 3. Custom Types
@@ -104,6 +124,8 @@ enum WebEvent {
 }
 ```
 
+---
+
 ***casting***
 ```rust
 enum Color {
@@ -114,6 +136,8 @@ enum Color {
 
 println!("roses are #{:06x}", Color::Red as i32); //casting
 ```
+
+---
 
 ***use***
 ```rust
@@ -142,8 +166,12 @@ fn main() {
 ***Variable Bindings***
 - bind a value to a variable
 
+---
+
 ***Type inference***
-- compiler guess type of a value, no need to annotate/cast 
+- compiler guess type of a value, no need to annotate/cast
+
+---
 
 ***_variable***
 - no unutilized warning for variable begining by *_*
@@ -162,6 +190,8 @@ let value = 0;
 let value = "uwu"
 ```
 
+---
+
 ***scope***
 - block of code containing some variables and code
 - inner variables of a scope have a lifetime equal to their scope ending by default
@@ -172,6 +202,8 @@ let value = "uwu"
 - name a variable
 - can be done without *initialisation*, but compil error if never initialized
 - *declaration first* is seldom because risky
+
+---
 
 ***initialization***
 - set value/type of a declared variable
@@ -194,8 +226,48 @@ let mut _mutable_integer = 7i32;
 ***coercion***
 - unexplicit type conversion, opposit to casting
 
+---
+
 ***casting***
--
+- explicit type conversion
+- as "keyword"
+
+---
+
+***saturation cast***
+```rust
+300.0 as u8 == 255
+```
+
+---
+
+***litterals***
+```rust
+let x = 1u8;
+let y = 2u32;
+let z = 3f32;
+
+//how they are used (def: i32/f64)
+let i = 1;
+let f = 1.0;
+```
+
+***std::mem::size_of_val(&x)*** return variable's size in bytes
+
+---
+
+***inference***
+```rust
+    let elem = 5u8;
+    let mut vec = Vec::new();
+    // compiler doesn't know the exact type of `vec`
+    vec.push(elem);
+```
+
+---
+
+ ***aliasing***
+
 
 
 
