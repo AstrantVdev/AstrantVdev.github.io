@@ -32,8 +32,44 @@ porco rosso, je pleure, *bang bang*
 
 ---
 
-***Inferrence***
+- explicit type conversion
+- as "keyword"
 
+---
+
+***saturation cast***
+```rust
+300.0 as u8 == 255
+```
+
+---
+
+***litterals***
+```rust
+let x = 1u8;
+let y = 2u32;
+let z = 3f32;
+
+//how they are used (def: i32/f64)
+let i = 1;
+let f = 1.0;
+```
+
+***std::mem::size_of_val(&x)*** return variable's size in bytes
+
+---
+
+***inference***
+```rust
+    let elem = 5u8;
+    let mut vec = Vec::new();
+    // compiler doesn't know the exact type of `vec`
+    vec.push(elem);
+```
+
+---
+
+ ***aliasing***
 ---
 
 ***Shadowing***
@@ -934,48 +970,3 @@ for i in 0..1024 {
     acc += addition;
 }
 ```
-- explicit type conversion
-- as "keyword"
-
----
-
-***saturation cast***
-```rust
-300.0 as u8 == 255
-```
-
----
-
-***litterals***
-```rust
-let x = 1u8;
-let y = 2u32;
-let z = 3f32;
-
-//how they are used (def: i32/f64)
-let i = 1;
-let f = 1.0;
-```
-
-***std::mem::size_of_val(&x)*** return variable's size in bytes
-
----
-
-***inference***
-```rust
-    let elem = 5u8;
-    let mut vec = Vec::new();
-    // compiler doesn't know the exact type of `vec`
-    vec.push(elem);
-```
-
----
-
- ***aliasing***
-
-
-
-
-
-
-
